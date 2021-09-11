@@ -1,0 +1,35 @@
+.containerAbout{
+    background-color: white;
+    width: 100vw;
+    margin-bottom: 90px; 
+    height: 380px;
+    position: relative;
+    text-align: center;
+    margin-top: 100vh;
+}
+
+
+
+.aboutContent{
+   text-align: center;
+
+   img{
+       width: 600px;
+       height: auto;
+   }
+   
+    h1{
+        color: black;
+        margin-bottom: 0.5em;
+    }
+    p{
+        padding: 5px;
+        color: black;
+        margin-bottom: 0.4em;
+    }
+
+    a{
+        color: black;
+        
+    }
+}
