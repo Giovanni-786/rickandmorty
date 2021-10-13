@@ -2,15 +2,17 @@
 import { Header } from '../components/Header'
 import '../styles/globals.css'
 import {Provider as NextAuthProvider} from 'next-auth/client';
+import BoardProvider from '../context/contextApi';
 
 function MyApp({ Component, pageProps }) {
   return (
     
-    
+    <BoardProvider>
     <NextAuthProvider session={pageProps.session}>
     <Header/>
     <Component {...pageProps} />
     </NextAuthProvider>
+    </BoardProvider>
     
     
     )

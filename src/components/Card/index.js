@@ -1,24 +1,47 @@
 import styles from './styles.module.scss';
 import ReactPaginate from "react-paginate";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useBoard } from '../../context/contextApi';
+import { api } from '../../services/api';
 
-export function Card(props) {    
-  const [currentPage, setCurrentPage] = useState(0);
-
-
-  const handlePageClick = ({ selected: selectedPage }) => {
-    setCurrentPage(selectedPage);
-  };
+export function Card({character}) {    
   
-  const PER_PAGE = 20;
-  const offset = currentPage * PER_PAGE;
-  const pageCount = Math.ceil(props.data.info?.count / PER_PAGE);
+  console.log(character);
 
+  const [currentPage, setCurrentPage] = useState(0);
+  // const [character, setCharacters] = useState([]);
+
+  // const {
+  //   currentPage,
+  //   setCurrentPage
+  // } = useBoard();
+
+    // const getCharacters = async() => {
+    //   api.get(`/character`).then((response)=>setCharacters(response.data)).catch((err)=>{
+    //       console.log("Ops! Ocorreu um erro" + err);
+    //     })
+    // }
+
+    // console.log(character.info.count)
+
+    // useEffect(() =>{
+    //   getCharacters();
+    // },[])
+
+
+
+  // const handlePageClick = ({ selected: selectedPage }) => {
+  //   setCurrentPage(selectedPage);
+  // };
+  
+  // const PER_PAGE = 20;
+  // const offset = currentPage * PER_PAGE;
+  // const pageCount = Math.ceil(character.info?.count / PER_PAGE);
 
     return (
         <>
         <div className={styles.containerMain}>
-        {props.data.results?.slice(offset, offset + PER_PAGE).map((item, key) => {
+        {/* {character.results?.slice(offset, offset + PER_PAGE).map((item, key) => {
             return (
               <section key={item.id} className={styles.cardContainer}>
                 <div className={styles.card}>
@@ -40,7 +63,7 @@ export function Card(props) {
         )
         })}
 
-        {props.data.results?.length > 4 && (
+        {character.results?.length > 4 && (
             <div className={styles.center}>
               <ReactPaginate
                 previousLabel={"Anterior"}
@@ -55,8 +78,21 @@ export function Card(props) {
               />
 
             </div>
-          )}
+          )} */}
         </div>
       </>
     );
+}
+
+
+export async function getStaticProps() {
+  const response = await api.get('/character/1,2,8,4,5,6')
+  const data = await response.data;
+  
+  return {
+    props: {
+      character: data,
+    },
+    revalidate: 60 * 60 * 24, // 24hrs
+  }
 }
