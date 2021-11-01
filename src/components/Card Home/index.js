@@ -13,7 +13,7 @@ export function CardHome(props) {
                   <div className={styles.cardContent}>
                     <h2>{item.name}</h2>
                     <span className={styles.status}>
-                      <img src="/images/lens.svg" alt="circle" className={item.status == 'Dead' ? styles.dead : null}></img>
+                      <img src="/images/lens.svg" alt="circle" className={item.status === 'Dead' ? styles.dead : item.status === 'unknown' ? styles.unknown : null}></img>
                       {item.status}
                     </span>
                     <p>{item.species}</p>

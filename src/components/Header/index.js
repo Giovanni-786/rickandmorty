@@ -4,10 +4,12 @@ import { SignInButton } from '../SignInButton';
 import styles from './styles.module.scss';
 import { ToastContainer } from 'react-nextjs-toast'
 import { useRouter } from 'next/router'
+import { useState } from 'react';
 
 export function Header(){
     const router = useRouter()
     const [session] = useSession();
+    const [isActive, setIsActive] = useState();
 
   function handleCharacters(){
       if(!session){
@@ -19,6 +21,12 @@ export function Header(){
 
       return router.push("/characters");
       }
+
+      function handleClick(){
+          setIsActive('active');
+      }
+
+      console.log(isActive);
     
   return (
         <>
@@ -26,7 +34,7 @@ export function Header(){
         <header className={styles.headerContainer}>
             <div className={styles.headerContent}>
                 <nav>          
-                    <a className={styles.active} href="/">Home</a>
+                    <a  onClick={handleClick} className={isActive == 'active' ? styles.active : null} href="/">Home</a>
                     {
                     (session) ?
                     <a onClick={handleCharacters}>Characters</a>

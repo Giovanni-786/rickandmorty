@@ -1,40 +1,16 @@
 import styles from '../styles/Characters.module.scss'
-import { useSession, signIn } from 'next-auth/client';
+import { useSession, signIn, session, getSession } from 'next-auth/client';
 import { parseCookies } from 'nookies';
-import { useEffect, useState } from 'react';
 import { api } from '../services/api';
-import ReactPaginate from 'react-paginate';
+import { useRouter } from "next/dist/client/router";
+import Link, { LinkProps } from "next/link";
+
+
 import Router from 'next/router'
-import { Card } from '../components/Card';
-import { useBoard } from '../context/contextApi';
+
 
 
 export default function Characters({characters, page}) {
-    // const [character, setCharacters] = useState([]);
-    // const {
-    //   currentPage,
-    //   setCurrentPage
-    // } = useBoard();
-
-    console.log(characters);
-
-    
-
-    
-    // api.get(`/character?page=${currentPage}`).then((response)=>setCharacters(response.data)).catch((err)=>{
-    //   console.log("Ops! Ocorreu um erro" + err);
-    // })
-
-    // const getCharacters = async() => {
-    //   api.get(`/character?page=${currentPage}`).then((response)=>setCharacters(response.data)).catch((err)=>{
-    //       console.log("Ops! Ocorreu um erro" + err);
-    //     })
-    // }
-
-
-    // useEffect(() =>{
-    //   getCharacters();
-    // },[])
   
     return (
     <>  
@@ -65,15 +41,18 @@ export default function Characters({characters, page}) {
         )
         })}
 
-        <button onClick={() => Router.push(`?page=${page - 1}`)}>
+        {/* <Link href="?page=${page - 1}">
+          <a>PREVIEW</a>
+        </Link> */}
+
+        <button className={styles.paginate_preview} onClick={() => Router.push(`?page=${page - 1}`)}>
           PREVIEW
         </button>
 
-        <button onClick={() => Router.push(`?page=${page + 1}`)}>
+        <button className={styles.paginate_next} onClick={() => Router.push(`?page=${page + 1}`)}>
           NEXT
         </button>
-
-
+      
         
         </div>
 
@@ -83,22 +62,12 @@ export default function Characters({characters, page}) {
   
 }
 
-export const getServerSideProps = async({ query:{page = 1}, ctx}) =>{
+export const getServerSideProps = async({ query:{page = 1}, req}) =>{
+  const session = await getSession({req});
   const response = await api.get(`/character?page=${page}`)
   const data = await response.data;
-  
-
-
-  const {['next-auth.session-token']: token} = parseCookies(ctx)
     
-  if(!token){
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false
-      }
-    }
-  }else{
+  console.log(session);
     return {
       props: {
         characters: data,
@@ -106,5 +75,4 @@ export const getServerSideProps = async({ query:{page = 1}, ctx}) =>{
       }
     }
 
-  }
 }

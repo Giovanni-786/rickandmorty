@@ -79,6 +79,10 @@
         filter: invert(18%) sepia(70%) saturate(3414%) hue-rotate(351deg) brightness(101%) contrast(104%);
 
      }
+
+     &.unknown{
+        filter: invert(69%) sepia(2%) saturate(0%) hue-rotate(148deg) brightness(92%) contrast(76%);
+     }
     
     }
 }

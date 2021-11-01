@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.scss';
-import { Card } from '../components/Card';
 import { api } from '../services/api';
 import { About } from '../components/About';
 import { CardHome } from '../components/Card Home';
