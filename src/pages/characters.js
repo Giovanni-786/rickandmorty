@@ -62,17 +62,27 @@ export default function Characters({characters, page}) {
   
 }
 
-export const getServerSideProps = async({ query:{page = 1}, req}) =>{
+export const getServerSideProps = async({query:{ page = 1}, req}) =>{
+ 
   const session = await getSession({req});
   const response = await api.get(`/character?page=${page}`)
   const data = await response.data;
-    
-  console.log(session);
+  
+  if(!session){
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }else{
     return {
       props: {
         characters: data,
         page: parseInt(page, 10)
       }
     }
+  }
 
+  
 }

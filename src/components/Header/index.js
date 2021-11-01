@@ -2,14 +2,16 @@
 import { useSession, signIn } from 'next-auth/client';
 import { SignInButton } from '../SignInButton';
 import styles from './styles.module.scss';
-import { ToastContainer } from 'react-nextjs-toast'
 import { useRouter } from 'next/router'
 import { useState } from 'react';
+import Link from 'next/link';
+
 
 export function Header(){
     const router = useRouter()
     const [session] = useSession();
     const [isActive, setIsActive] = useState();
+    const { asPath } = useRouter();
 
   function handleCharacters(){
       if(!session){
@@ -22,11 +24,6 @@ export function Header(){
       return router.push("/characters");
       }
 
-      function handleClick(){
-          setIsActive('active');
-      }
-
-      console.log(isActive);
     
   return (
         <>
@@ -34,10 +31,14 @@ export function Header(){
         <header className={styles.headerContainer}>
             <div className={styles.headerContent}>
                 <nav>          
-                    <a  onClick={handleClick} className={isActive == 'active' ? styles.active : null} href="/">Home</a>
+                    <Link className={isActive == 'active' ? styles.active : ''} href="/">
+                     <a className={asPath === '/' ? styles.active : ''}> Home </a>
+                    </Link>
                     {
                     (session) ?
-                    <a onClick={handleCharacters}>Characters</a>
+                    <Link href="/characters"> 
+                        <a className={asPath === '/characters' ? styles.active : ''}>Characters</a>
+                    </Link>
                     : null
                     }
                     </nav>
