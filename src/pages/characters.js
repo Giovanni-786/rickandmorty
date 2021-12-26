@@ -26,12 +26,16 @@ export default function Characters({characters, page}) {
                   <div className={styles.cardContent}>
                     <h2>{item.name}</h2>
                     <span className={styles.status}>
-                      <img src="/images/lens.svg" alt="circle" className={item.status == 'Dead' ? styles.dead : null}></img>
+                      <img src="/images/lens.svg" alt="circle" className={item.status == 'Dead' ? styles.dead : item.status === 'unknown' ? styles.unknown : null}></img>
                       {item.status}
                     </span>
                     <p>{item.species}</p>
                     <p>{item.gender}</p>
                     <p>Origin: {item.origin.name}</p>
+
+                    <Link href={`/character/${item.id}`}>
+                      <a className={styles.link_slug}>Show character</a>
+                    </Link>
                   </div>
                   <div className={styles.cardImage}>
                     <img src={item.image}></img>
@@ -41,9 +45,6 @@ export default function Characters({characters, page}) {
         )
         })}
 
-        {/* <Link href="?page=${page - 1}">
-          <a>PREVIEW</a>
-        </Link> */}
 
         <button className={styles.paginate_preview} onClick={() => Router.push(`?page=${page - 1}`)}>
           PREVIEW
