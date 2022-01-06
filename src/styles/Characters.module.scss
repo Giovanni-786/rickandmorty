@@ -16,6 +16,9 @@
     gap: 5px;
     background-color: white;
     
+    h2{
+        color: black;
+    }
     
 }
 .cardContainer{
@@ -102,37 +105,29 @@
   }
 
 }
+}
 
 /***Button paginate***/
 
-
-.pagination_container{
+.paginate_container{
     display: flex;
-
-}
-
-.paginate_preview{
-    margin-right: 30px;
-    margin-left: 70%;
-    width: 200px;
-    height: 30px;
-    margin-bottom: 40px;
-    color: white;
-    border: 2px solid #94f012;
-    border-radius: 8px;
-    background: rgba($color: #000000, $alpha: 9.0)
-
-}
-
-.paginate_next{
-    width: 200px;
-    
-    height: 30px;
-    color: white;
-    margin-bottom: 40px;
-    border: 2px solid #94f012;
-    border-radius: 8px;
-    background: rgba($color: #000000, $alpha: 9.0)
+    flex-direction: row;
     
 }
+
+.paginate{
+    width: 100%;
+    display: flex;
+    
+    ul{
+        margin: 3rem auto;
+        display: flex;
+        color: black;
+        
+        li{
+            font-size: 1.3rem;
+            padding: 8px;
+            cursor: pointer;
+        }
+    }
 }
