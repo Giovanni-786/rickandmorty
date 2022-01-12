@@ -9,6 +9,7 @@ import Link, { LinkProps } from "next/link";
 import Router from 'next/router'
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import { CardCharacter } from '../components/CardCharacter';
 
 
 
@@ -40,31 +41,7 @@ export default function Characters({characters, page}) {
       <h1>All Characters avaliable in API!</h1>
     </div>   
     <div className={styles.containerMain}>
-            {items.slice(offset, offset+PER_PAGE).map((item)=>(
-                 
-                 <section key={item.id} className={styles.cardContainer}>
-                 <div className={styles.card}>
-                   <div className={styles.cardContent}>
-                     <h2>{item.name}</h2>
-                     <span className={styles.status}>
-                       <img src="/images/lens.svg" alt="circle" className={item.status == 'Dead' ? styles.dead : item.status === 'unknown' ? styles.unknown : null}></img>
-                       {item.status}
-                     </span>
-                     <p>{item.species}</p>
-                     <p>{item.gender}</p>
-                     <p>Origin: {item.origin.name}</p>
- 
-                     <Link href={`/character/${item.id}`}>
-                       <a className={styles.link_slug}>Show character</a>
-                     </Link>
-                   </div>
-                   <div className={styles.cardImage}>
-                     <img src={item.image}></img>
-                   </div>
-                 </div>
-               </section>
-               
-            ))}
+            <CardCharacter data={items} />
       </div>
 
       <section className={styles.paginate_container}>
