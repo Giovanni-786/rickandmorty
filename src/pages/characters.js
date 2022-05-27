@@ -1,6 +1,5 @@
 import styles from '../styles/Characters.module.scss'
 import { useSession, signIn, session, getSession } from 'next-auth/client';
-import { parseCookies } from 'nookies';
 import { api } from '../services/api';
 import { useRouter } from "next/dist/client/router";
 import Link, { LinkProps } from "next/link";
@@ -10,8 +9,6 @@ import Router from 'next/router'
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { CardCharacter } from '../components/CardCharacter';
-
-
 
 export default function Characters({characters, page}) {
   
@@ -32,8 +29,6 @@ export default function Characters({characters, page}) {
     setCurrentPage(selectedPage);
     Router.push(`?page=${page = selectedPage + 1}`);
   };
-
-
 
   return (
     <>  

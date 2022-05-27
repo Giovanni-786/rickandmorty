@@ -14,8 +14,10 @@ export function CardCharacter(props){
 
     return(
         <>
+        
         <div className={styles.containerMain}>
         {props.data?.slice(offset, offset+PER_PAGE).map((item)=>(     
+          
            <section key={item.id} className={styles.cardContainer}>
            <div className={styles.card}>
              <div className={styles.cardContent}>

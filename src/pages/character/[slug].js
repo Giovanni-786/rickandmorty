@@ -3,7 +3,7 @@ import styles from './character.module.scss'
 
 export default function Character({character}){
 
-    
+
     return(
         <div className={styles.containerMain}>
               return (
@@ -30,12 +30,12 @@ export default function Character({character}){
     )
 }
 
-
 export const getServerSideProps = async({params}) =>{
         const {slug} = params;
 
         const response = await api.get(`/character/${slug}`);
         const data = await response.data;
+
         return {
             props: {
                 character: data,

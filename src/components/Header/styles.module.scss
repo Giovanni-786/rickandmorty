@@ -15,12 +15,8 @@
     background: white;
     
     nav {
-        margin-left: 5rem;
         height: 5rem;
         background: white;
-
-     
-        
 
         a{
             display: inline-block;
@@ -44,8 +40,7 @@
                 color: black;
                 font-weight: bold;
             }
-
-
+            
             &.active::after{
                 content: '';
                 height: 3px;

@@ -13,6 +13,8 @@ export function Header(){
     const [isActive, setIsActive] = useState();
     const { asPath } = useRouter();
 
+    console.log(asPath);
+
   function handleCharacters(){
       if(!session){
           signIn('github')       
@@ -31,7 +33,7 @@ export function Header(){
         <header className={styles.headerContainer}>
             <div className={styles.headerContent}>
                 <nav>          
-                    <Link className={isActive == 'active' ? styles.active : ''} href="/">
+                    <Link href="/">
                      <a className={asPath === '/' ? styles.active : ''}> Home </a>
                     </Link>
                     {
